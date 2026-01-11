@@ -1,6 +1,7 @@
 import sqlite3
 import os
 from datetime import date
+from models.Tarefa import Tarefa
 
 class BancoDeDados:
     def __init__(self):
@@ -58,5 +59,21 @@ class BancoDeDados:
         :rtype: list
         """
         cursor = self._cursor.execute("SELECT * FROM tarefas")
-        return cursor.fetchall()
+        cursor = cursor.fetchall()
+
+        lista_de_tarefas = []
+        for item in cursor:
+            #Transforma os dados em objeto Tarefa
+            tarefa_atual = Tarefa(
+                item[1],
+                item[2],
+                date(int(item[3][0:4]), int(item[3][5:7]), int(item[3][8:10])),
+                item[4],
+                True if item[5] == 1 else False)
+            
+            tarefa_atual.ID = item[0]
+            lista_de_tarefas.append(tarefa_atual)
+        
+        return lista_de_tarefas
+            
         

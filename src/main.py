@@ -10,6 +10,7 @@ while not parar:
     gerar_titulo("Gerenciador de Tarefas")
     print(
         "[1] - Cadastrar nova tarefa.\n"
+        "[2] - Listar tarefas.\n"
         "[5] - Sair"
     )
 
@@ -38,3 +39,7 @@ while not parar:
         else:
             print("Dados inválidos!")
             sleep(2)
+    
+    elif escolha_usuario == "2": #-----------------Listar tarefas----------------#
+        gerar_titulo("Lista de Tarefas")
+        LISTA_TAREFAS.listar_tarefas()
