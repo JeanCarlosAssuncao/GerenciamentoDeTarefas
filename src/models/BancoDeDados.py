@@ -4,8 +4,11 @@ from datetime import date
 
 class BancoDeDados:
     def __init__(self):
-        database_adress = f"src{os.sep}databases{os.sep}gerenciador_tarefas.db"
-        self._conexao = sqlite3.connect(database_adress)
+        base_dir = os.path.join("src", "databases")
+        os.makedirs(base_dir, exist_ok=True)  # cria a pasta se não existir
+        database_address = os.path.join(base_dir, "gerenciador_tarefas.db")
+        
+        self._conexao = sqlite3.connect(database_address)
         self._cursor = self._conexao.cursor()
 
         self.criar_tabela()
