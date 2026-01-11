@@ -5,9 +5,9 @@ class Tarefa:
         self._ID = None
         self.titulo = titulo
         self.descricao = descricao
-        self._prazo = prazo
-        self._status = status
-        self._prioridade = prioridade
+        self.prazo = prazo
+        self.status = status
+        self.prioridade = prioridade
     
     @property
     def ID(self) -> int:
