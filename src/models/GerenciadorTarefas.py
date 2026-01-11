@@ -1,4 +1,4 @@
-from BancoDeDados import BancoDeDados
+from models.BancoDeDados import BancoDeDados
 
 class GerenciadorTarefas:
     def __init__(self):
