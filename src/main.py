@@ -13,6 +13,7 @@ while not parar:
         "[1] - Cadastrar nova tarefa. \n"
         "[2] - Listar tarefas. \n"
         "[3] - Atualizar Status de uma tarefa. \n"
+        "[4] - Atualizar dados de uma tarefa. \n"
         "[5] - Sair"
     )
 
@@ -57,18 +58,45 @@ while not parar:
                 novo_status = coletar_status()
                 if novo_status:
                     tarefa.status = novo_status[1]
+
+                    # Atualiza o banco de dados e a lista de tarefas.
                     banco = BancoDeDados()
                     resultado = banco.atualizar_tarefa(tarefa)
                     LISTA_TAREFAS.coletar_tarefas_database()
 
-                    if resultado[0] == True:
-                        print(resultado[1])
-                        sleep(2)
-                    else:
-                        print(resultado[1])
-                        sleep(2)
+                    print(resultado[1])
+                    sleep(2)
                 else:
                     print(novo_status[1])
                     sleep(2)
                 break
+    
+    elif escolha_usuario == "4": #---------------------- editar tarefa ----------------------- #
+        gerar_titulo("Editar Tarefa")
+        LISTA_TAREFAS.listar_tarefas()
+        id_tarefa = input("ID da tarefa: ")
 
+        for tarefa in LISTA_TAREFAS.tarefas:
+            if int(id_tarefa) == tarefa.ID:
+
+                novo_titulo = input("Novo titulo: ")
+                nova_descricao = input("Nova descrição: ")
+                novo_prazo = coleta_data()
+
+                if novo_prazo[0]:
+                    tarefa.titulo = novo_titulo
+                    tarefa.descricao = nova_descricao
+                    tarefa.prazo = novo_prazo[1]
+
+                    # Atualiza o banco de dados e a lista de tarefas.
+                    banco = BancoDeDados()
+                    resultado = banco.atualizar_tarefa(tarefa)
+                    LISTA_TAREFAS.coletar_tarefas_database()
+
+                    print(resultado[1])
+                    sleep(2)
+
+                else:
+                    print(novo_prazo[1])
+                    sleep(2)
+                break
