@@ -75,5 +75,29 @@ class BancoDeDados:
             lista_de_tarefas.append(tarefa_atual)
         
         return lista_de_tarefas
-            
+    
+    def atualizar_tarefa(self, tarefa_atualizada: object) -> tuple:
+        """
+        Atualiza os dados da tarefa no banco de dados
         
+        :param tarefa_atualizada: Objeto Tarefa atualizado
+        :type tarefa_atualizada: object
+        :return: Boolean mais mensagem informativa
+        :rtype: tuple
+        """
+        try:
+            self._cursor.execute("""
+                UPDATE tarefas
+                SET status = ?, prioridade = ?, titulo = ?, descricao = ?, prazo = ?
+                WHERE id = ?
+                """, (tarefa_atualizada.status,
+                      tarefa_atualizada.prioridade,
+                      tarefa_atualizada.titulo,
+                      tarefa_atualizada.descricao,
+                      tarefa_atualizada.prazo.isoformat(),
+                      tarefa_atualizada.ID))
+            self._conexao.commit()
+            
+            return True, "Tarefa atualizada!"
+        except:
+            return False, "Dados inválidos"

@@ -2,7 +2,7 @@ from models.BancoDeDados import BancoDeDados
 
 class GerenciadorTarefas:
     def __init__(self):
-        self.tarefas = []
+        self._tarefas = []
         self.coletar_tarefas_database()
     
     def adicionar_tarefa(self, tarefa: object) -> tuple:
@@ -27,9 +27,11 @@ class GerenciadorTarefas:
             print(f"{'Prioridade:':<20} {tarefa.prioridade:>45}")
             print("-="*60)
             print()
-
-        input('Pressione "Enter" para voltar.')
     
     def coletar_tarefas_database(self):
         banco = BancoDeDados()
         self._tarefas = banco.listar_tarefas()
+    
+    @property
+    def tarefas(self) -> list:
+        return self._tarefas

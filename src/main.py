@@ -1,6 +1,7 @@
 from utils import gerar_titulo, coleta_data, coletar_status, coletar_prioridade
 from models.GerenciadorTarefas import GerenciadorTarefas
 from models.Tarefa import Tarefa
+from models.BancoDeDados import BancoDeDados
 from time import sleep
 
 LISTA_TAREFAS = GerenciadorTarefas()
@@ -9,8 +10,9 @@ parar = False
 while not parar:
     gerar_titulo("Gerenciador de Tarefas")
     print(
-        "[1] - Cadastrar nova tarefa.\n"
-        "[2] - Listar tarefas.\n"
+        "[1] - Cadastrar nova tarefa. \n"
+        "[2] - Listar tarefas. \n"
+        "[3] - Atualizar Status de uma tarefa. \n"
         "[5] - Sair"
     )
 
@@ -43,3 +45,30 @@ while not parar:
     elif escolha_usuario == "2": #-----------------Listar tarefas----------------#
         gerar_titulo("Lista de Tarefas")
         LISTA_TAREFAS.listar_tarefas()
+        input('Pressione "Enter" para voltar.')
+    
+    elif escolha_usuario == "3": #------------------ Atualizar Status -------------------- #
+        gerar_titulo("Atualizar Status")
+        LISTA_TAREFAS.listar_tarefas()
+        id_tarefa = input("ID da tarefa: ")
+
+        for tarefa in LISTA_TAREFAS.tarefas:
+            if int(id_tarefa) == tarefa.ID:
+                novo_status = coletar_status()
+                if novo_status:
+                    tarefa.status = novo_status[1]
+                    banco = BancoDeDados()
+                    resultado = banco.atualizar_tarefa(tarefa)
+                    LISTA_TAREFAS.coletar_tarefas_database()
+
+                    if resultado[0] == True:
+                        print(resultado[1])
+                        sleep(2)
+                    else:
+                        print(resultado[1])
+                        sleep(2)
+                else:
+                    print(novo_status[1])
+                    sleep(2)
+                break
+
