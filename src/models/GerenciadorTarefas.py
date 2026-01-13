@@ -35,3 +35,18 @@ class GerenciadorTarefas:
     @property
     def tarefas(self) -> list:
         return self._tarefas
+    
+    def remover_tarefa(self, end_tarefa) -> tuple:
+        """
+        remove uma tarefa.
+        
+        :param end_tarefa: Objeto Tarefa que deseja remover.
+        :return: tupla com boolean e mensagem
+        :rtype: tuple
+        """
+        
+        banco = BancoDeDados()
+        resultado = banco.remover_tarefa(end_tarefa.ID)
+        
+        self.coletar_tarefas_database()
+        return resultado

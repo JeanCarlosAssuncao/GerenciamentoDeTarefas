@@ -14,12 +14,13 @@ while not parar:
         "[2] - Listar tarefas. \n"
         "[3] - Atualizar Status de uma tarefa. \n"
         "[4] - Atualizar dados de uma tarefa. \n"
-        "[5] - Sair"
+        "[5] - Remover uma tarefa. \n"
+        "[8] - Sair"
     )
 
     escolha_usuario = input("Número de sua escolha: ").strip()
 
-    if escolha_usuario == "5": #---------------- sair --------------------#
+    if escolha_usuario == "8": #---------------- sair --------------------#
         parar = True
 
     elif escolha_usuario == "1": #-------------- cadastrar nova tarefa -----------------#
@@ -100,3 +101,21 @@ while not parar:
                     print(novo_prazo[1])
                     sleep(2)
                 break
+    elif escolha_usuario == "5": #------------------------ remover tarefa --------------------------#
+        gerar_titulo("Remover Tarefa")
+        LISTA_TAREFAS.listar_tarefas()
+        id_tarefa = input("ID da tarefa: ")
+
+        for tarefa in LISTA_TAREFAS.tarefas:
+            if int(id_tarefa) == tarefa.ID:
+                resultado = LISTA_TAREFAS.remover_tarefa(tarefa)
+                print(resultado[1])
+                sleep(2)
+                break
+        try:
+            print(resultado[1])
+            sleep(2)
+        except NameError:
+            print("ID inválido! ")
+            sleep(2)
+

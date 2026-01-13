@@ -101,3 +101,25 @@ class BancoDeDados:
             return True, "Tarefa atualizada!"
         except:
             return False, "Dados inválidos"
+    
+    def remover_tarefa(self, id:int) -> tuple:
+        """
+        Remove uma tarefa do banco de dados
+        
+        :param id: ID da tarefa
+        :type id: int
+        :return: retorna bollean e a mensagem informativa
+        :rtype: tuple
+        """
+        try:
+            self._cursor.execute(
+                """DELETE FROM tarefas
+                WHERE id = ?""",
+                (id, )
+            )
+            self._conexao.commit()
+            return True, "Tarefa deletada!"
+        except sqlite3.Error as error:
+            return False, error
+        except Exception as error:
+            return False, error
