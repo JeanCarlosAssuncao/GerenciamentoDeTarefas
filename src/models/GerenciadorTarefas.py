@@ -19,14 +19,7 @@ class GerenciadorTarefas:
         Lista todas as tarefas de forma ordenada e detalhada
         """
         for tarefa in self._tarefas:
-            print(f"{'ID:':<20} {tarefa.ID:>45}")
-            print(f"{'Titulo:':<20} {tarefa.titulo:>45}")
-            print(f"{'Descrição:':<20} {tarefa.descricao:>45}")
-            print(f"{'Prazo:':<20} {str(tarefa.prazo):>45}")
-            print(f"{'Status:':<20} {tarefa.status:>45}")
-            print(f"{'Prioridade:':<20} {tarefa.prioridade:>45}")
-            print("-="*60)
-            print()
+            print(tarefa)
     
     def coletar_tarefas_database(self):
         banco = BancoDeDados()
@@ -44,9 +37,14 @@ class GerenciadorTarefas:
         :return: tupla com boolean e mensagem
         :rtype: tuple
         """
-        
+
         banco = BancoDeDados()
         resultado = banco.remover_tarefa(end_tarefa.ID)
         
         self.coletar_tarefas_database()
         return resultado
+
+    def listar_por_status(self, status: str) -> tuple:
+        for tarefa in self._tarefas:
+            if tarefa.status == status:
+                print(tarefa)

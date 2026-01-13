@@ -15,6 +15,7 @@ while not parar:
         "[3] - Atualizar Status de uma tarefa. \n"
         "[4] - Atualizar dados de uma tarefa. \n"
         "[5] - Remover uma tarefa. \n"
+        "[6] - Listar tarefas por Status. \n"
         "[8] - Sair"
     )
 
@@ -118,4 +119,13 @@ while not parar:
         except NameError:
             print("ID inválido! ")
             sleep(2)
-
+    
+    elif escolha_usuario == "6": #----------------------Listar por Status ----------------------- #
+        gerar_titulo("Lista por Status")
+        status = coletar_status()
+        if status:
+            LISTA_TAREFAS.listar_por_status(status[1])
+            input("Pressione 'Enter' para continuar.")
+        else:
+            print(status[1])
+        

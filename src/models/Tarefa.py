@@ -79,3 +79,18 @@ class Tarefa:
             self._prioridade = prioridade
         else:
             raise TypeError("prioridade deve conter valor boolean!")
+    
+    def __str__(self) -> str:
+        """
+        Retorna os dados em str formatado para ser printado.
+
+        :return: dados formatados
+        :rtype: str
+        """
+        return f"""{'ID:':<20} {self.ID:>45}
+{'Titulo:':<20} {self.titulo:>45}
+{'Descrição:':<20} {self.descricao:>45}
+{'Prazo:':<20} {str(self.prazo):>45}
+{'Status:':<20} {self.status:>45}
+{'Prioridade:':<20} {self.prioridade:>45}
+{'-=' * 60} \n"""
