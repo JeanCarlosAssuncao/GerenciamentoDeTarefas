@@ -94,3 +94,9 @@ class Tarefa:
 {'Status:':<20} {self.status:>45}
 {'Prioridade:':<20} {self.prioridade:>45}
 {'-=' * 60} \n"""
+    
+    def marcar_prioridade(self):
+        """
+        Marca essa tarefa como prioritária
+        """
+        self.prioridade = True

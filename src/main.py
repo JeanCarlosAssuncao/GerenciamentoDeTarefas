@@ -19,6 +19,7 @@ while not parar:
         "[7] - Listar por Titulo ou Descrição. \n"
         "[8] - Ordenar tarefas por Prazo. \n"
         "[9] - Ordenar tarefas por Status. \n"
+        "[10] - Definir prioridade. \n"
         "[12] - Sair"
     )
 
@@ -164,3 +165,19 @@ while not parar:
             mensagem = "Opção inválida!"
         print(mensagem)
         sleep(2)
+    
+    elif escolha_usuario == "10": #--------------------------- definir prioridade --------------------------------- #
+        gerar_titulo("Definir prioridade")
+        LISTA_TAREFAS.listar_tarefas()
+        id_tarefa = input("ID da tarefa: ")
+        
+        for tarefa in LISTA_TAREFAS.tarefas:
+            if str(tarefa.ID) == id_tarefa:
+                tarefa.marcar_prioridade()
+                banco = BancoDeDados()
+                banco.atualizar_tarefa(tarefa)
+                LISTA_TAREFAS.coletar_tarefas_database()
+
+                print("Tarefa definida como prioridade!")
+                sleep(2)
+                break
