@@ -173,11 +173,14 @@ while not parar:
         
         for tarefa in LISTA_TAREFAS.tarefas:
             if str(tarefa.ID) == id_tarefa:
-                tarefa.marcar_prioridade()
+                if tarefa.prioridade == 0:
+                    tarefa.marcar_prioridade()
+                else:
+                    tarefa.remover_prioridade()
                 banco = BancoDeDados()
                 banco.atualizar_tarefa(tarefa)
                 LISTA_TAREFAS.coletar_tarefas_database()
 
-                print("Tarefa definida como prioridade!")
+                print("Prioridade da tarefa alterada!")
                 sleep(2)
                 break

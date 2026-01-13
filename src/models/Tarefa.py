@@ -100,3 +100,9 @@ class Tarefa:
         Marca essa tarefa como prioritária
         """
         self.prioridade = True
+    
+    def remover_prioridade(self):
+        """
+        Marca essa tarefa como não prioritária
+        """
+        self.prioridade = False
