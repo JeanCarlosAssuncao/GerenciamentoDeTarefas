@@ -17,12 +17,13 @@ while not parar:
         "[5] - Remover uma tarefa. \n"
         "[6] - Listar tarefas por Status. \n"
         "[7] - Listar por Titulo ou Descrição. \n"
-        "[8] - Sair"
+        "[8] - Ordenar tarefas por prazo. \n"
+        "[12] - Sair"
     )
 
     escolha_usuario = input("Número de sua escolha: ").strip()
 
-    if escolha_usuario == "8": #---------------- sair --------------------#
+    if escolha_usuario == "12": #---------------- sair --------------------#
         parar = True
 
     elif escolha_usuario == "1": #-------------- cadastrar nova tarefa -----------------#
@@ -133,6 +134,18 @@ while not parar:
     elif escolha_usuario == "7": #---------------Listar por titulo ou descricao ----------------- #
         gerar_titulo("Listar por Titulo ou Descrição")
         frase = input("Palavra ou Frase que deseja procurar: ")
-        resultado = LISTA_TAREFAS.listar_por_titulo_cescricao(frase)
+        resultado = LISTA_TAREFAS.listar_por_titulo_descricao(frase)
         print(resultado[1])
-        input("Pressione 'Enter' para continuar...")        
+        input("Pressione 'Enter' para continuar...")
+
+    elif escolha_usuario == "8": #-------------------------- ordenar por prazo ------------------------- #
+        print("[1] - Ordem Crescente. \n[2] - Ordem Decrescente.")
+        ordem = input("Número de escolha: ")
+        if ordem == "1":
+            mensagem = LISTA_TAREFAS.ordenar_por_prazo(True)
+        elif ordem == "2":
+            mensagem = LISTA_TAREFAS.ordenar_por_prazo(False)
+        else:
+            mensagem = "Opção inválida!"
+        print(mensagem)
+        sleep(2)

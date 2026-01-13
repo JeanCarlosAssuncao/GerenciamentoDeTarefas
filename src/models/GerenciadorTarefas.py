@@ -49,7 +49,7 @@ class GerenciadorTarefas:
             if tarefa.status == status:
                 print(tarefa)
     
-    def listar_por_titulo_cescricao(self, pesquisa: str) -> tuple:
+    def listar_por_titulo_descricao(self, pesquisa: str) -> tuple:
         """
         Procura algo parecido com o parametro pesquisa dentro do titulo ou dentro da descrição da tarefa
         
@@ -72,3 +72,10 @@ class GerenciadorTarefas:
             return True, f"{quantidade} tarefas encontradas."
         else:
             return False, "Nenhuma tarefa encontrada." 
+    
+    def ordenar_por_prazo(self, crescente: bool) -> str:
+        self._tarefas.sort(key= lambda tarefa: tarefa.prazo, reverse=False if crescente else True)
+        return f"Lista sortida em ordem {'Crescente' if crescente else 'Descrescente'}!"
+
+    def ordenar_por_status(self):
+        pass
