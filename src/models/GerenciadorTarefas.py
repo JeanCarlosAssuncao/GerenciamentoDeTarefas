@@ -48,3 +48,27 @@ class GerenciadorTarefas:
         for tarefa in self._tarefas:
             if tarefa.status == status:
                 print(tarefa)
+    
+    def listar_por_titulo_cescricao(self, pesquisa: str) -> tuple:
+        """
+        Procura algo parecido com o parametro pesquisa dentro do titulo ou dentro da descrição da tarefa
+        
+        :param pesquisa: palavra ou frase que deseja encontrar
+        :type pesquisa: str
+        :return: boolean e menseagem informativa
+        :rtype: tuple
+        """
+
+        quantidade = 0
+        for tarefa in self._tarefas:
+            if pesquisa.lower() in tarefa.titulo.lower():
+                print(tarefa)
+                quantidade += 1
+            elif pesquisa.lower() in tarefa.descricao.lower():
+                print(tarefa)
+                quantidade += 1
+        
+        if quantidade > 0:
+            return True, f"{quantidade} tarefas encontradas."
+        else:
+            return False, "Nenhuma tarefa encontrada." 

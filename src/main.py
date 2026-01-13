@@ -16,6 +16,7 @@ while not parar:
         "[4] - Atualizar dados de uma tarefa. \n"
         "[5] - Remover uma tarefa. \n"
         "[6] - Listar tarefas por Status. \n"
+        "[7] - Listar por Titulo ou Descrição. \n"
         "[8] - Sair"
     )
 
@@ -128,4 +129,10 @@ while not parar:
             input("Pressione 'Enter' para continuar.")
         else:
             print(status[1])
-        
+    
+    elif escolha_usuario == "7": #---------------Listar por titulo ou descricao ----------------- #
+        gerar_titulo("Listar por Titulo ou Descrição")
+        frase = input("Palavra ou Frase que deseja procurar: ")
+        resultado = LISTA_TAREFAS.listar_por_titulo_cescricao(frase)
+        print(resultado[1])
+        input("Pressione 'Enter' para continuar...")        
