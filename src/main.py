@@ -17,7 +17,8 @@ while not parar:
         "[5] - Remover uma tarefa. \n"
         "[6] - Listar tarefas por Status. \n"
         "[7] - Listar por Titulo ou Descrição. \n"
-        "[8] - Ordenar tarefas por prazo. \n"
+        "[8] - Ordenar tarefas por Prazo. \n"
+        "[9] - Ordenar tarefas por Status. \n"
         "[12] - Sair"
     )
 
@@ -139,12 +140,26 @@ while not parar:
         input("Pressione 'Enter' para continuar...")
 
     elif escolha_usuario == "8": #-------------------------- ordenar por prazo ------------------------- #
+        gerar_titulo("Ordenar por Prazo")
         print("[1] - Ordem Crescente. \n[2] - Ordem Decrescente.")
         ordem = input("Número de escolha: ")
         if ordem == "1":
             mensagem = LISTA_TAREFAS.ordenar_por_prazo(True)
         elif ordem == "2":
             mensagem = LISTA_TAREFAS.ordenar_por_prazo(False)
+        else:
+            mensagem = "Opção inválida!"
+        print(mensagem)
+        sleep(2)
+    
+    elif escolha_usuario == "9": #---------------------------- ordenar por status --------------------------- #
+        gerar_titulo("Ordenar por Status")
+        print("[1] - pendente -> em andamento -> concluida \n[2] - concluida -> em andamento -> pendente")
+        ordem = input("Número de escolha: ")
+        if ordem == "1":
+            mensagem = LISTA_TAREFAS.ordenar_por_status(True)
+        elif ordem == "2":
+            mensagem = LISTA_TAREFAS.ordenar_por_status(False)
         else:
             mensagem = "Opção inválida!"
         print(mensagem)

@@ -74,8 +74,31 @@ class GerenciadorTarefas:
             return False, "Nenhuma tarefa encontrada." 
     
     def ordenar_por_prazo(self, crescente: bool) -> str:
+        """
+        Ordena a lista de tarefas
+        
+        :param crescente: True para crescente False para decrescente
+        :type crescente: bool
+        :return: mensagem informando como foi ordenado
+        :rtype: str
+        """
         self._tarefas.sort(key= lambda tarefa: tarefa.prazo, reverse=False if crescente else True)
         return f"Lista sortida em ordem {'Crescente' if crescente else 'Descrescente'}!"
 
-    def ordenar_por_status(self):
-        pass
+    def ordenar_por_status(self, crescente: bool) -> str:
+        """
+        Ordena a lista de tarefas
+        
+        :param crescente: True para crescente False para decrescente
+        :type crescente: bool
+        :return: mensagem informando como foi ordenado
+        :rtype: str
+        """
+        ordem = {
+            "pendente": 1,
+            "em andamento": 2,
+            "concluida": 3
+        }
+
+        self._tarefas.sort(key= lambda tarefa: ordem[tarefa.status], reverse=False if crescente else True)
+        return f"Lista sortida em ordem {'pendente->em andamento->concluida' if crescente else 'concluida->em andamento->pendente'}!"
